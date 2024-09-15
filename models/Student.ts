@@ -6,4 +6,5 @@ export const students = pgTable("Student", {
   school_id: integer("school_id").references(() => schools.id), // שימוש במפתח זר מטבלת schools
   name: varchar("name", { length: 255 }),
   grade: varchar("grade", { length: 10 }),
+  math_units: integer("math_units"), // כמות יחידות במתמטיקה (3, 4 או 5)
 });

@@ -1,10 +1,12 @@
 import { drizzle, PostgresJsDatabase } from "drizzle-orm/postgres-js";
 import { integer, pgTable, serial, varchar } from "drizzle-orm/pg-core";
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import postgres from "postgres";
 import { genSaltSync, hashSync } from "bcrypt-ts";
 import { schools } from "models/School";
 import { students } from "models/Student";
+import { grades } from "models/Grade";
+import { schoolsData, studentsData } from "./data";
 
 // Optionally, if not using email/pass login, you can
 // use the Drizzle adapter for Auth.js / NextAuth
@@ -14,10 +16,11 @@ let db: PostgresJsDatabase<Record<string, never>>;
 
 initialize();
 
-async function initialize() {
+export async function initialize() {
   try {
     await connectToDatabase();
     await ensureAllTablesExists();
+    // await insertSampleData();
     console.log("All tables ensured.");
   } catch (error) {
     console.error("Error during initialization:", error);
@@ -134,7 +137,8 @@ async function ensureStudentsTableExists() {
         id SERIAL PRIMARY KEY,
         school_id INT REFERENCES "School"(id),
         name VARCHAR(255),
-        grade VARCHAR(10)
+        grade VARCHAR(10),
+        math_units INT 
       );`;
     }
 
@@ -143,6 +147,7 @@ async function ensureStudentsTableExists() {
       school_id: integer("school_id").references(() => schools.id),
       name: varchar("name", { length: 255 }),
       grade: varchar("grade", { length: 10 }),
+      math_units: integer("math_units"),
     });
 
     return table;
@@ -183,4 +188,94 @@ async function ensureGradesTableExists() {
   } catch (error) {
     console.error("Error creating Grade table:", error);
   }
+}
+
+async function insertSampleData() {
+  await insertSchools();
+  await insertStudents();
+  await insertGrades();
+}
+
+// Add Data to DB:
+
+const gradesData = studentsData.map((student) => ({
+  subject: "מתמטיקה",
+  score: Math.floor(Math.random() * 41) + 60,
+  exam_date: new Date(),
+}));
+
+async function insertSchools() {
+  for (const school of schoolsData) {
+    await db.insert(schools).values({ name: school.name, city: school.city });
+  }
+  console.log("Schools inserted.");
+}
+
+async function insertStudents() {
+  const allSchools = await db.select().from(schools);
+
+  for (const student of studentsData) {
+    const randomSchool =
+      allSchools[Math.floor(Math.random() * allSchools.length)];
+
+    await db.insert(students).values({
+      name: student.name,
+      grade: student.grade,
+      math_units: student.math_units,
+      school_id: randomSchool.id,
+    });
+  }
+  console.log("Students inserted.");
+}
+
+async function insertGrades() {
+  const allStudents = await db.select().from(students);
+
+  for (const grade of gradesData) {
+    const randomStudent =
+      allStudents[Math.floor(Math.random() * allStudents.length)];
+
+    await db.insert(grades).values({
+      student_id: randomStudent.id,
+      subject: grade.subject,
+      score: grade.score,
+      exam_date: grade.exam_date.toISOString(),
+    });
+  }
+  console.log("Grades inserted.");
+}
+
+(async () => {
+  const res = await calculateFiveUnitPercentage();
+})();
+
+export async function calculateFiveUnitPercentage() {
+  const allSchools = await db.select().from(schools); // שליפת כל בתי הספר
+
+  const result = [];
+
+  for (const school of allSchools) {
+    const totalStudents = await db
+      .select()
+      .from(students)
+      .where(eq(students.school_id, school.id));
+
+    const fiveUnitStudents = await db
+      .select()
+      .from(students)
+      .where(
+        and(eq(students.school_id, school.id), eq(students.math_units, 5))
+      );
+
+    const percentage = (fiveUnitStudents.length / totalStudents.length) * 100;
+
+    result.push({
+      school: school.name,
+      totalStudents: totalStudents.length,
+      fiveUnitStudents: fiveUnitStudents.length,
+      percentage: percentage.toFixed(2),
+    });
+  }
+
+  return result;
 }

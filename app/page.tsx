@@ -1,3 +1,9 @@
+import FiveUnitChart from "./cmps/FiveUnitChart";
+
 export default function Page() {
-  return <div>Home Page</div>;
+  return (
+    <div>
+      <FiveUnitChart />
+    </div>
+  );
 }

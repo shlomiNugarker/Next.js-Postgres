@@ -12,7 +12,7 @@ import { schoolsData, studentsData } from "./data";
 // use the Drizzle adapter for Auth.js / NextAuth
 // https://authjs.dev/reference/adapter/drizzle
 let client: postgres.Sql<{}>;
-let db: PostgresJsDatabase<Record<string, never>>;
+let db: PostgresJsDatabase<Record<string, any>>;
 
 initialize();
 
@@ -245,12 +245,8 @@ async function insertGrades() {
   console.log("Grades inserted.");
 }
 
-(async () => {
-  const res = await calculateFiveUnitPercentage();
-})();
-
 export async function calculateFiveUnitPercentage() {
-  const allSchools = await db.select().from(schools); // שליפת כל בתי הספר
+  const allSchools = await db.select().from(schools);
 
   const result = [];
 

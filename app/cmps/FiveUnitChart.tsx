@@ -39,9 +39,6 @@ export default function FiveUnitChart() {
   }, []);
 
   return (
-    <div>
-      <h2>אחוז תלמידים שלומדים 5 יחידות מתמטיקה</h2>
-      {chartData ? <Bar data={chartData} /> : <p>טוען נתונים...</p>}
-    </div>
+    <div>{chartData ? <Bar data={chartData} /> : <p>טוען נתונים...</p>}</div>
   );
 }

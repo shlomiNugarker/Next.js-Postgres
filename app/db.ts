@@ -14,7 +14,7 @@ import { schoolsData, studentsData } from "./data";
 let client: postgres.Sql<{}>;
 let db: PostgresJsDatabase<Record<string, any>>;
 
-initialize();
+// initialize();
 
 export async function initialize() {
   try {

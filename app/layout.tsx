@@ -1,5 +1,5 @@
 import Footer from "./layouts/cmps/Footer";
-import "./globals.css";
+import "./styles/main.scss";
 
 import { GeistSans } from "geist/font/sans";
 import Providers from "./layouts/partials/Providers";

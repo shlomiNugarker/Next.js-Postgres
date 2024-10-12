@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  @import "base";
+}
+
+@layer components {
+  @import "components";
+  @import "navigation";
+  @import "buttons";
+  @import "search";
+  @import "animations";
+}
+
+@layer utilities {
+  @import "utilities";
+}
+
 /* :root {
   --background-color: white;
   --text-color: black;

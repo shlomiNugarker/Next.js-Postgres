@@ -3,7 +3,7 @@ import { integer, pgTable, serial, varchar } from "drizzle-orm/pg-core";
 import { eq } from "drizzle-orm";
 import postgres from "postgres";
 import { genSaltSync, hashSync } from "bcrypt-ts";
-import { messagesData, offersData, tradesData, usersData } from "./data";
+import { messagesData, offersData, tradesData, usersData } from "../data";
 import { users } from "@/app/models/User";
 import { offers } from "@/app/models/Offer";
 import { messages } from "@/app/models/Message";

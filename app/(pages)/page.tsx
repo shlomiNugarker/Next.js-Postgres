@@ -1,4 +1,4 @@
-import ThemeSwitcher from "./layouts/cmps/ThemeSwitcher";
+import ThemeSwitcher from "../layouts/cmps/ThemeSwitcher";
 
 export default function Page() {
   return (

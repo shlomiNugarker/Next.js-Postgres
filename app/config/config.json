@@ -1,0 +1,27 @@
+{
+  "site": {
+    "title": "title",
+    "base_url": "",
+    "base_path": "/",
+    "trailing_slash": false,
+    "favicon": "/images/favicon.png",
+    "logo": "/images/logo.png",
+    "logo_darkmode": "/images/logo.png",
+    "logo_width": "150",
+    "logo_height": "27",
+    "logo_text": "logo_text"
+  },
+
+  "settings": {
+    "search": true,
+    "sticky_header": true,
+    "theme_switcher": true,
+    "default_theme": "light",
+    "pagination": 2,
+    "summary_length": 200,
+    "blog_folder": "blog",
+    "default_language": "he",
+    "disable_languages": [],
+    "default_language_in_subdir": false
+  }
+}

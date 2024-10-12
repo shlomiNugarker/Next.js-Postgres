@@ -15,7 +15,7 @@ import { trades } from "@/app/models/Trade";
 let client: postgres.Sql<{}>;
 let db: PostgresJsDatabase<Record<string, any>>;
 
-initialize();
+// initialize();
 
 export async function initialize() {
   try {

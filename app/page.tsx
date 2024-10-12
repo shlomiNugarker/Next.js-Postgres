@@ -1,7 +1,10 @@
+import ThemeSwitcher from "./layouts/cmps/ThemeSwitcher";
+
 export default function Page() {
   return (
     <>
-      <div>home</div>;
+      <ThemeSwitcher className="" />
+      <div>home</div>
     </>
   );
 }

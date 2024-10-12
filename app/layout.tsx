@@ -1,7 +1,8 @@
-import Footer from "./cmps/Footer";
+import Footer from "./layouts/cmps/Footer";
 import "./globals.css";
 
 import { GeistSans } from "geist/font/sans";
+import Providers from "./layouts/partials/Providers";
 
 let title = "Title";
 let description = "Description";
@@ -23,10 +24,26 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={GeistSans.variable}>
-        {children}
-        <Footer />
+    <html suppressHydrationWarning={true} lang="en">
+      <head>
+        <meta name="theme-name" content="nextapp" />
+        <meta name="msapplication-TileColor" content="#000000" />
+        <meta
+          name="theme-color"
+          media="(prefers-color-scheme: light)"
+          content="#fff"
+        />
+        <meta
+          name="theme-color"
+          media="(prefers-color-scheme: dark)"
+          content="#000"
+        />
+      </head>
+      <body suppressHydrationWarning={true} className={GeistSans.variable}>
+        <Providers>
+          <main className="min-h-custom ">{children}</main>
+          <Footer />
+        </Providers>
       </body>
     </html>
   );

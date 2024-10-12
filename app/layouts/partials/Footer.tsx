@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Footer() {
   return (
-    <footer className=" text-center ">
+    <footer className="text-center bg-theme-light dark:bg-darkmode-theme-light">
       <div className="container pt-9">
         <div className="mb-9 flex justify-center">
           <a className="mr-9">

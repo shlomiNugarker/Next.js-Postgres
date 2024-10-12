@@ -3,6 +3,7 @@ import "../styles/main.scss";
 
 import { GeistSans } from "geist/font/sans";
 import Providers from "../layouts/partials/Providers";
+import Header from "../layouts/partials/Header";
 
 let title = "Title";
 let description = "Description";
@@ -39,8 +40,14 @@ export default async function RootLayout({
           content="#000"
         />
       </head>
-      <body suppressHydrationWarning={true} className={GeistSans.variable}>
+      <body
+        suppressHydrationWarning={true}
+        className={
+          GeistSans.variable + " bg-theme-light dark:bg-darkmode-theme-light"
+        }
+      >
         <Providers>
+          <Header />
           <main className="min-h-custom ">{children}</main>
           <Footer />
         </Providers>

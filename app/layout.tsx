@@ -16,7 +16,7 @@ export const metadata = {
   metadataBase: new URL("https://shlomi-nugarker-portfolio.vercel.app"),
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;

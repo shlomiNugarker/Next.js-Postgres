@@ -1,4 +1,4 @@
-import Footer from "../layouts/cmps/Footer";
+import Footer from "../layouts/partials/Footer";
 import "../styles/main.scss";
 
 import { GeistSans } from "geist/font/sans";
@@ -42,7 +42,7 @@ export default async function RootLayout({
       <body suppressHydrationWarning={true} className={GeistSans.variable}>
         <Providers>
           <main className="min-h-custom ">{children}</main>
-          {/* <Footer /> */}
+          <Footer />
         </Providers>
       </body>
     </html>

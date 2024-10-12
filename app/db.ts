@@ -18,8 +18,6 @@ let db: PostgresJsDatabase<Record<string, any>>;
 initialize();
 
 export async function initialize() {
-  console.log("initialize");
-
   try {
     await connectToDatabase();
     await ensureAllTablesExists();

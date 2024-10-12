@@ -1,3 +1,4 @@
+import Footer from "./cmps/Footer";
 import "./globals.css";
 
 import { GeistSans } from "geist/font/sans";
@@ -23,7 +24,10 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={GeistSans.variable}>{children}</body>
+      <body className={GeistSans.variable}>
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }

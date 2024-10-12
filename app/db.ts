@@ -4,10 +4,10 @@ import { eq } from "drizzle-orm";
 import postgres from "postgres";
 import { genSaltSync, hashSync } from "bcrypt-ts";
 import { messagesData, offersData, tradesData, usersData } from "./data";
-import { users } from "models/User";
-import { offers } from "models/Offer";
-import { messages } from "models/Message";
-import { trades } from "models/Trade";
+import { users } from "@/app/models/User";
+import { offers } from "@/app/models/Offer";
+import { messages } from "@/app/models/Message";
+import { trades } from "@/app/models/Trade";
 
 // Optionally, if not using email/pass login, you can
 // use the Drizzle adapter for Auth.js / NextAuth
